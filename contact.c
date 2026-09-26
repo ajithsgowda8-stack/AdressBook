@@ -31,29 +31,33 @@ void listContacts(AddressBook *addressBook)
     else if(strcmp(basis,"name")==0)   
     {
         sortName(addressBook);
-        printf("\n=======CONTACT-LISTS=========\n");
-        printf("----------------------------------\n");
-        printf("%-10s %-20s %-30s %-40s\n","SN","name","phone_number","email");
+         FILE *fptr=fopen("data.txt","w");
+        fprintf(fptr,"\n=======CONTACT-LISTS=========\n");
+        fprintf(fptr,"----------------------------------\n");
+        fprintf(fptr,"%-10s %-20s %-30s %-40s\n","SN","name","phone_number","email");
 
         for(int i=0;i<addressBook->contactCount;i++)
         {
-            printf("%-10d %-20s %-30s %-40s\n",i+1,addressBook->contacts[i].name,addressBook->contacts[i].phone,addressBook->contacts[i].email);
+            fprintf(fptr,"%-10d %-20s %-30s %-40s\n",i+1,addressBook->contacts[i].name,addressBook->contacts[i].phone,addressBook->contacts[i].email);
         }
-        printf("----------------------------------\n");
+        fprintf(fptr,"----------------------------------\n");
+        fclose(fptr);
         
     }
     else if(strcmp(basis,"email")==0)
     {
         sortEmail(addressBook);
-        printf("\n=======CONTACT-LISTS=========\n");
-        printf("----------------------------------\n");
-        printf("%-10s %-20s %-30s %-40s\n","SN","name","phone_number","email");
+         FILE *fptr=fopen("data.txt","w");
+        fprintf(fptr,"\n=======CONTACT-LISTS=========\n");
+        fprintf(fptr,"----------------------------------\n");
+        fprintf(fptr,"%-10s %-20s %-30s %-40s\n","SN","name","phone_number","email");
 
         for(int i=0;i<addressBook->contactCount;i++)
         {
-            printf("%-10d %-20s %-30s %-40s\n",i+1,addressBook->contacts[i].name,addressBook->contacts[i].phone,addressBook->contacts[i].email);
+            fprintf(fptr,"%-10d %-20s %-30s %-40s\n",i+1,addressBook->contacts[i].name,addressBook->contacts[i].phone,addressBook->contacts[i].email);
         }
-        printf("----------------------------------\n");
+        fprintf(fptr,"----------------------------------\n");
+        fclose(fptr);
             
     }
     else
@@ -268,12 +272,12 @@ void sortName(AddressBook *addressBook)
                 addressBook->contacts[j]=addressBook->contacts[j+1];
                 addressBook->contacts[j+1]=temp;
             }
-            if(isupper(addressBook->contacts[j].name))
-            {
-                Contact temp=addressBook->contacts[j];
-                addressBook->contacts[j]=addressBook->contacts[j+1];
-                addressBook->contacts[j+1]=temp;
-            }
+            // if(isupper(addressBook->contacts[j].name))
+            // {
+            //     Contact temp=addressBook->contacts[j];
+            //     addressBook->contacts[j]=addressBook->contacts[j+1];
+            //     addressBook->contacts[j+1]=temp;
+            // }
             
         }
         
