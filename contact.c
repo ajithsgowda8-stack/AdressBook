@@ -16,48 +16,28 @@ void listContacts(AddressBook *addressBook)
     if(strcmp(basis,"phone")==0)
     {
         sortPhone(addressBook);
-        FILE *fptr=fopen("data.txt","w");
-        fprintf(fptr,"\n=======CONTACT-LISTS=========\n");
-        fprintf(fptr,"----------------------------------\n");
-        fprintf(fptr,"%-10s %-20s %-30s %-40s\n","SN","name","phone_number","email");
-
         for(int i=0;i<addressBook->contactCount;i++)
         {
-            fprintf(fptr,"%-10d %-20s %-30s %-40s\n",i+1,addressBook->contacts[i].name,addressBook->contacts[i].phone,addressBook->contacts[i].email);
+            printf("%s %s %s\n",addressBook->contacts[i].name,addressBook->contacts[i].phone,addressBook->contacts[i].email);
         }
-        fprintf(fptr,"----------------------------------\n");
-        fclose(fptr);
-    }
+    }    
     else if(strcmp(basis,"name")==0)   
     {
         sortName(addressBook);
-         FILE *fptr=fopen("data.txt","w");
-        fprintf(fptr,"\n=======CONTACT-LISTS=========\n");
-        fprintf(fptr,"----------------------------------\n");
-        fprintf(fptr,"%-10s %-20s %-30s %-40s\n","SN","name","phone_number","email");
-
         for(int i=0;i<addressBook->contactCount;i++)
         {
-            fprintf(fptr,"%-10d %-20s %-30s %-40s\n",i+1,addressBook->contacts[i].name,addressBook->contacts[i].phone,addressBook->contacts[i].email);
+            printf("%s %s %s\n",addressBook->contacts[i].name,addressBook->contacts[i].phone,addressBook->contacts[i].email);
         }
-        fprintf(fptr,"----------------------------------\n");
-        fclose(fptr);
         
     }
     else if(strcmp(basis,"email")==0)
     {
         sortEmail(addressBook);
-         FILE *fptr=fopen("data.txt","w");
-        fprintf(fptr,"\n=======CONTACT-LISTS=========\n");
-        fprintf(fptr,"----------------------------------\n");
-        fprintf(fptr,"%-10s %-20s %-30s %-40s\n","SN","name","phone_number","email");
-
         for(int i=0;i<addressBook->contactCount;i++)
         {
-            fprintf(fptr,"%-10d %-20s %-30s %-40s\n",i+1,addressBook->contacts[i].name,addressBook->contacts[i].phone,addressBook->contacts[i].email);
+            printf("%s %s %s\n",addressBook->contacts[i].name,addressBook->contacts[i].phone,addressBook->contacts[i].email);
         }
-        fprintf(fptr,"----------------------------------\n");
-        fclose(fptr);
+       
             
     }
     else
@@ -71,12 +51,12 @@ void initialize(AddressBook *addressBook) {
     addressBook->contactCount = 0;
     
     // Load contacts from file during initialization (After files)
-    //loadContactsFromFile(addressBook);
+    loadContactsFromFile(addressBook);
 }
 
 void saveAndExit(AddressBook *addressBook) {
     saveContactsToFile(addressBook); // Save contacts to file
-    exit(EXIT_SUCCESS); // Exit the program
+    exit(0); // Exit the program
 }
 
 
@@ -95,9 +75,44 @@ void createContact(AddressBook *addressBook)
     addressBook->contactCount++;
 }
 
-void searchContact(AddressBook *addressBook) 
+void searchContact(AddressBook *addressBook)
 {
-    /* Define the logic for search */
+    int search;
+    static int found=0;
+
+    // Load data from file into addressBook
+    loadContactsFromFile(addressBook);
+
+    printf("Enter contact number to search: ");
+    scanf("%d", &search);
+    int i=search-1;
+    // printf("Name: ");
+    // for(int j=0;j<strlen(addressBook->contacts[i].name);j++)
+    // {
+    //     do
+    //     {
+    //         printf("%s\n", addressBook->contacts[i].name[j]);    
+    //     }while(addressBook->contacts[i].name[j]!='\0');
+    // }
+    for(int i=0;i<addressBook->contactCount;i++)
+        {
+            if(i==search-1)
+            {
+        // printf("\n========== CONTACT FOUND ==========\n");
+
+                printf("Name  : %s\n", addressBook->contacts[i].name);
+                printf("Phone : %s\n", addressBook->contacts[i].phone);
+                printf("Email : %s\n", addressBook->contacts[i].email);
+                found=1;
+            }
+        }
+
+        // printf("===================================\n");
+    
+    if(!found)
+    {
+        printf("Contact Not Found\n");
+    }
 }
 
 void editContact(AddressBook *addressBook)
@@ -115,13 +130,15 @@ void validateName(AddressBook *addressBook)
 {
     
     int i=addressBook->contactCount;
-    printf("count=%d",i);
+    printf("count= %d\n",i);
     int validn;
+    printf("Enter name: ");
     
     do
     {
         
         validn=1;
+        
         scanf(" %[^\n]", addressBook->contacts[i].name);
         if(strlen(addressBook->contacts[i].name)<2)
         {
@@ -163,9 +180,11 @@ void validatePhoneNumber(AddressBook *addressBook)
 {
     int i=addressBook->contactCount;
     int validp;
+    printf("Enter phone number: ");
     do
     {
         // printf("Enter phone number: ");
+        
         scanf(" %[^\n]", addressBook->contacts[i].phone);
         int phoneLength = strlen(addressBook->contacts[i].phone);
         validp=1;
@@ -317,3 +336,5 @@ void sortEmail(AddressBook *addressBook)
     }
     
 }
+
+
