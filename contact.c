@@ -130,7 +130,7 @@ void editContact(AddressBook *addressBook)
     
 
    
-=======
+
    int index= searchContact(addressBook);
     
     char edit[20];
