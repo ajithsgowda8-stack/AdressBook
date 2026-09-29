@@ -27,9 +27,7 @@ void validateEmail(AddressBook *addressBook);
 void sortName(AddressBook *addressBook);
 void sortPhone(AddressBook *addressBook);
 void sortEmail(AddressBook *addressBook);
-void editPhone(AddressBook *addressBook);
-void editName(AddressBook *addressBook);
-void editEmail(AddressBook *addressBook,int index);
+
 
 
 
