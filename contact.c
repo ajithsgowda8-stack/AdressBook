@@ -81,7 +81,47 @@ int array[20];
 
 int searchContact(AddressBook *addressBook)
 {
+<<<<<<< HEAD
    
+=======
+    char search[50];
+    loadContactsFromFile(addressBook);
+    int serial_no=1;
+    int start_index=1;
+    // int array[20];
+    printf("Enter name or phone number: ");
+    scanf("%s", search);
+    for(int i=0;i<addressBook->contactCount;i++)
+    {
+       if(strcasestr(addressBook->contacts[i].name,search)!=NULL||strcasestr(addressBook->contacts[i].phone,search))
+       {
+            array[start_index]=i;
+            printf("%d: %s\n",serial_no,addressBook->contacts[i].name);
+            serial_no++;
+            start_index++;
+            
+       }
+       
+       
+    }
+    // printf("%d",serial_no);
+    if(serial_no==1)
+    {
+        printf("No possible contact");
+    }
+    
+    
+    printf("which one: ");
+    int choice;
+    scanf("%d",&choice);
+    int index=array[choice];
+    
+    printf("Name  : %s\n", addressBook->contacts[index].name);
+    printf("Phone : %s\n", addressBook->contacts[index].phone);
+    printf("Email : %s\n", addressBook->contacts[index].email);
+    
+    return index;
+>>>>>>> 91770d6 (first commit)
         
 }
 
@@ -90,13 +130,81 @@ void editContact(AddressBook *addressBook)
 {
     
     
+<<<<<<< HEAD
    
+=======
+   int index= searchContact(addressBook);
+    
+    char edit[20];
+    
+    printf("Which u want to edit: ");
+    scanf("%s",edit);
+    if(strcmp(edit,"phone")==0)
+    {
+        editPhone(addressBook);
+    }
+    else if(strcmp(edit,"name")==0)
+    {
+        editName(addressBook);
+    }
+    else if(strcmp(edit,"email")==0)
+    {
+        editEmail(addressBook,index);
+    }
+    else
+    {
+        printf("Invalid choice");
+    }
+    
+    
+>>>>>>> 91770d6 (first commit)
     
 }
 
 void deleteContact(AddressBook *addressBook)
 {
+<<<<<<< HEAD
 	
+=======
+	char search[50];
+    loadContactsFromFile(addressBook);
+    int serial_no=1;
+    int start_index=1;
+    // int array[20];
+    printf("Enter name or phone number: ");
+    scanf("%s", search);
+    for(int i=0;i<addressBook->contactCount;i++)
+    {
+       if(strcasestr(addressBook->contacts[i].name,search)!=NULL||strcasestr(addressBook->contacts[i].phone,search))
+       {
+            array[start_index]=i;
+            printf("%d: %s\n",serial_no,addressBook->contacts[i].name);
+            serial_no++;
+            start_index++;
+            
+       }
+       
+       
+    }
+    // printf("%d",serial_no);
+    if(serial_no==1)
+    {
+        printf("No possible contact");
+    }
+    
+    
+    printf("which one: ");
+    int choice;
+    scanf("%d",&choice);
+    int index=array[choice];
+    for(int i=index;i<addressBook->contactCount-1;i++)
+    {
+        addressBook->contacts[i]=addressBook->contacts[i+1];
+    }
+    addressBook->contactCount--;
+    printf("deleted successfully");
+   
+>>>>>>> 91770d6 (first commit)
 }
 
 void validateName(AddressBook *addressBook)
@@ -318,3 +426,210 @@ void sortEmail(AddressBook *addressBook)
     }
     
 }
+<<<<<<< HEAD
+=======
+
+void editPhone(AddressBook *addressBook)
+{
+    char new_no[50];
+        // int  choice;
+        // int array[20];
+    int index;//=array[choice];
+        
+            while(1)
+            {
+                int found=1;
+            printf("Enter new phone number:");
+            
+            scanf("%s",new_no);
+            // if(validatePhoneNumber(addressBook));
+            // {
+            //     strcpy(addressBook->contacts[index].phone, new_no);
+            // printf("phone number copied");
+            // }
+            if(strlen(new_no)!=10)
+            {
+                printf("invlid length.Please enter valid number: ");
+                found=0;
+                continue;
+                // break;
+            }
+            
+            for(int i=0;i<10;i++)
+            {
+                if(!isdigit(new_no[i]))
+                {
+                    printf("digit only.Please enter valid number: ");
+                    found=0;
+                    continue;
+                    // break;
+                }
+            }
+            
+            if(!found)
+                continue;
+            if(new_no[0] < '6' || new_no[0] > '9')
+            {
+                printf("Phone number should start with 6, 7, 8 or 9.\n");
+                found=0;
+                continue;
+                // break;
+            }
+            
+            
+            for(int i=0;i<addressBook->contactCount;i++)
+            {
+                if(i!=index&&strcmp(addressBook->contacts[i].phone,new_no)==0)
+                {
+                    printf("Phone number is already exist,Enter vakid number: ");
+                    found=0;
+                    // continue;
+                    break;
+                    
+                }
+            }
+            if(!found)
+                continue;
+                
+            strcpy(addressBook->contacts[index].phone, new_no);
+            printf("phone number copied");
+            
+            break;
+            }
+            
+            
+        }
+            
+        
+
+void editName(AddressBook *addressBook)
+{
+        char new_name[50];
+        // int  choice;
+        // int array[20];
+    int index;//=array[choice];
+    
+    
+            
+            while(1)
+            {
+                int found=1;
+                printf("Enter new name: ");
+                scanf("%s",new_name);
+
+                if(strlen(new_name)<2)
+                {
+                    printf("Atleast 2 letter should be their,please enter valid name: ");
+                    found=0;
+                    continue;
+                }
+                if(found==1)
+                {
+                for(int i=0;i<addressBook->contactCount;i++)
+                {
+                    if(i!=index&&strcasecmp(addressBook->contacts[i].name,new_name)==0)
+                    {
+                        printf("Name is already exist.Please enter valid name: ");
+                        found=0;
+                        break;
+                    }
+                }
+                }
+                if(found==1)
+                {
+                    for(int i=0;i<addressBook->contactCount;i++)
+                    {
+                        if(!isalnum(new_name[i])&&new_name[i]!=' ')
+                    {
+                        printf("No space between the letters.Please enter valid number: ");
+                        found=0;
+                        break;
+                    }
+                    }
+                }
+                if(found==1)
+                {
+                    strcpy(addressBook->contacts[index].name,new_name);
+                    printf("name copied");
+                    break;
+                }
+            }
+        }
+void editEmail(AddressBook *addressBook,int index)
+{
+    char new_email[20];
+    // int index;
+    int i=addressBook->contactCount;
+    while(1)
+    {
+        int found=1;
+        printf("Enter new email: ");
+        scanf("%s",new_email);
+        int e_length=strlen(new_email);
+        for(int j=0;j<e_length;j++)
+        {
+            if(isupper((unsigned char)new_email[j]))
+            {
+                printf("Invalid email. Please enter a valid email: ");
+                found=0;
+                break;
+            }
+        } 
+        if (!found)
+            continue;  
+        
+        // if(addressBook->Contacts[i].email[e_length-4]!='.'||addressBook->Contacts[i].email[e_length-3]!='c'||addressBook->Contacts[i].email[e_length-2]=='o'||addressBook->Contacts[i].email[e_length-1]=='m')
+        char *rstc=strstr(new_email,".com");
+        if(rstc==NULL)
+        {
+            printf("email does not contain .com . Please enter a valid email: ");
+            found=0;
+            continue;
+        }
+        
+        char *rsta=strchr(new_email,'@');
+        if(rsta==NULL)
+        {
+            printf("email does not contain @. Please enter a valid email: ");
+            found=0;
+            continue;
+        }
+        if(new_email[0]=='@')
+        {
+            printf("first letter of email should not contain @. Please enter a valid email: ");
+            found=0;
+            continue;
+        }
+        if(rstc <= rsta + 1)
+        {
+            printf("There must be a character between @ and .com.please enter a valid email: ");
+            found = 0;
+            continue;
+        }
+        // check duplicate
+        for(int j=0;j<i;j++)
+        {
+            if(j!=index&&strcmp(addressBook->contacts[j].email,new_email)==0)
+            {
+                printf("email already exists. Please enter a different email: ");
+                found=0;
+                break;
+            }
+        }
+        if (!found)
+            continue;
+        if(found==1)
+        {
+            strcpy(addressBook->contacts[index].email,new_email);
+            printf("email copied");
+            break;
+        }
+
+    }
+                
+
+}
+       
+        
+
+>>>>>>> 91770d6 (first commit)
