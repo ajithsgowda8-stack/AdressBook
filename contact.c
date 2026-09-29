@@ -81,10 +81,7 @@ int array[20];
 
 int searchContact(AddressBook *addressBook)
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-   
-=======
+
     char search[50];
     loadContactsFromFile(addressBook);
     int serial_no=1;
@@ -122,10 +119,7 @@ int searchContact(AddressBook *addressBook)
     printf("Email : %s\n", addressBook->contacts[index].email);
     
     return index;
->>>>>>> 91770d6 (first commit)
-=======
-   
->>>>>>> a4a7d88078546d0a04d37fc4a68914d8e9ba380f
+
         
 }
 
@@ -134,8 +128,7 @@ void editContact(AddressBook *addressBook)
 {
     
     
-<<<<<<< HEAD
-<<<<<<< HEAD
+
    
 =======
    int index= searchContact(addressBook);
@@ -162,19 +155,15 @@ void editContact(AddressBook *addressBook)
     }
     
     
->>>>>>> 91770d6 (first commit)
-=======
-   
->>>>>>> a4a7d88078546d0a04d37fc4a68914d8e9ba380f
+
     
 }
 
 void deleteContact(AddressBook *addressBook)
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	
-=======
+
 	char search[50];
     loadContactsFromFile(addressBook);
     int serial_no=1;
@@ -213,10 +202,7 @@ void deleteContact(AddressBook *addressBook)
     addressBook->contactCount--;
     printf("deleted successfully");
    
->>>>>>> 91770d6 (first commit)
-=======
-	
->>>>>>> a4a7d88078546d0a04d37fc4a68914d8e9ba380f
+
 }
 
 void validateName(AddressBook *addressBook)
@@ -438,9 +424,7 @@ void sortEmail(AddressBook *addressBook)
     }
     
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 
 void editPhone(AddressBook *addressBook)
 {
@@ -645,6 +629,4 @@ void editEmail(AddressBook *addressBook,int index)
        
         
 
->>>>>>> 91770d6 (first commit)
-=======
->>>>>>> a4a7d88078546d0a04d37fc4a68914d8e9ba380f
+
